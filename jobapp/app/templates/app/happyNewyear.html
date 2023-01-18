@@ -1,0 +1,136 @@
+<html>
+<head>
+  <title>Matrix New Year</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00FFF3;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .message {
+      font-size: 3em;
+      font-weight: bold;
+      text-align: center;
+      color: #00FFF3;
+      text-shadow: 0 0 10px #00FFF3;
+    }
+    .matrix {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    Happy New Year from a smart AI to the whole world
+  </div>
+  <div class="matrix">
+    <canvas id="matrix"></canvas>
+  </div>
+  <p id="demo"></p>
+
+  <script>
+    // Get the canvas element
+    const canvas = document.getElementById("matrix");
+    // Set the canvas dimensions to fill the viewport
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // Get the canvas context
+    const ctx = canvas.getContext("2d");
+    // Set the character set
+    const characters = "01";
+    // Set the font size and font family
+    ctx.font = "10px 'Courier New'";
+    // Set the character colors
+    const colors = ["#00FFF3"];
+    // Set the maximum number of characters
+    const maxCharacters = 1000;
+    // Set the character speed
+    const speed = 10;
+    // Set the character interval
+    const interval = 50;
+
+    // Create an array to hold the characters
+    const charactersArray = [];
+
+    // Function to generate a random color
+    function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  // Function to generate a random character
+    function getRandomCharacter() {
+    return characters[Math.floor(Math.random() * characters.length)];
+  }
+  
+  
+    // Function to create a character object
+    function Character(x, y, color, character) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.character = character;
+    };
+
+   // Function to update the character position
+    Character.prototype.update = function() {
+    this.y += speed;
+    if (this.y > canvas.height) {
+      this.y = 0;
+    }
+  };
+
+  Character.prototype.draw = function() {
+    ctx.fillStyle = this.color;
+    ctx.fillText(this.character, this.x, this.y);
+  };
+  
+  // Function to draw the characters
+    function drawCharacters() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < charactersArray.length; i++) {
+      charactersArray[i].update();
+      charactersArray[i].draw();
+    }
+    requestAnimationFrame(drawCharacters);
+  }
+  
+  // Initialize the animation
+  drawCharacters();
+  
+  // Function to generate a new character
+  function addCharacter() {
+    // Create a new character object
+    const character = new Character(
+      Math.random() * canvas.width,
+      Math.random() * canvas.height,
+      getRandomColor(),
+      getRandomCharacter()
+    );
+  
+    // Add the character to the characters array
+    charactersArray.push(character);
+  
+    // If the number of characters exceeds the maximum, remove the first character
+    if (charactersArray.length > maxCharacters) {
+      charactersArray.shift();
+    }
+  }
+  
+    // Generate a new character every interval
+    setInterval(addCharacter, interval);
+  
+
+    </script
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% comment "first comments" %}
+        below is an if statement whcih will help us print only authenticated users names
+    {% endcomment %}
+    {% if is_authenticated %}
+        <h1>Hello World! {{ name }}</h1>
+    {% else %}
+        <h1>Hello There</h1>
+    {% endif %}
+    {% for i in jobList %}
+    <p>job title is: {{i}}</p>
+    
+    {% endfor %}
+
+    <h1> Filters </h1>
+    {{ jobList | length}}
+
+    {{ jobList | length_is:"3"}}
+
+
+</body>
+</html>
