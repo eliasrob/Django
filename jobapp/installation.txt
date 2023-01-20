@@ -1,0 +1,24 @@
+
+Make sure you are withing the venv by doing the following:
+    .\jobapp\jobappenv\Scripts\Activate
+
+then within the venv you check your pip3 list
+    if you need pip3 upgrade the previous command will tell you so and provide both 
+    path to pip3 and command to upgrade.
+
+then check for python3 using same method - you should have it already.
+
+finally check for django using:
+    django-admin --version, if you don't have it installed then use this line:
+        pip3 install django
+
+once all packages are installed, use pip3 list to verify the packages installed.
+
+then create a django app:
+    django-admin startproject "appname".
+    notice the . above which will tell django to create a project but without a new folder
+    so the app called "appname" will be created under the the root folder.
+
+
+and finally to run it:
+    python manage.py runserver
